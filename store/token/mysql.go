@@ -29,7 +29,6 @@ type MysqlConfig struct {
 
 func init() {
 	orm.RegisterModel(new(models.Token))
-	fmt.Println("init......")
 }
 
 // NewMysqlStore 创建Mysql的令牌存储
@@ -45,8 +44,6 @@ func NewMysqlStore(cfg *MysqlConfig) (store oauth2.TokenStore, err error) {
 
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	err = orm.RegisterDataBase("default", "mysql", conn)
-
-	fmt.Println("NewMysqlStore......")
 
 	store = &MysqlStore{}
 
@@ -73,8 +70,6 @@ func (ms *MysqlStore) Create(info oauth2.TokenInfo) (err error) {
 		expiredAt = tm.AccessCreateAt.Add(tm.AccessExpiresIn)
 	}
 
-	fmt.Println("Create......")
-
 	o := orm.NewOrm()
 	_, err = o.Insert(tm)
 	return
@@ -88,7 +83,6 @@ func (ms *MysqlStore) remove(token oauth2.TokenInfo) (err error) {
 
 // RemoveByAccess 移除令牌
 func (ms *MysqlStore) RemoveByAccess(access string) error {
-	fmt.Printf("RemoveByAccess, access = %s\n", access)
 	o := orm.NewOrm()
 	ti, err := ms.GetByAccess(access)
 	if err != nil {
@@ -101,7 +95,6 @@ func (ms *MysqlStore) RemoveByAccess(access string) error {
 
 // RemoveByRefresh 移除令牌
 func (ms *MysqlStore) RemoveByRefresh(refresh string) error {
-	fmt.Printf("RemoveByRefresh, refresh = \n", refresh)
 	o := orm.NewOrm()
 	ti, err := ms.GetByRefresh(refresh)
 	if err != nil {

@@ -9,17 +9,17 @@ func NewToken() *Token {
 
 // Token 令牌信息
 type Token struct {
-	ClientID         string        `bson:"ClientID"`         // 客户端标识
-	UserID           string        `bson:"UserID"`           // 用户标识
-	RedirectURI      string        `bson:"RedirectURI"`      // 重定向URI
-	Scope            string        `bson:"Scope"`            // 权限范围
-	AuthType         string        `bson:"AuthType"`         // 令牌授权类型
-	Access           string        `bson:"Access"`           // 访问令牌
-	AccessCreateAt   time.Time     `bson:"AccessCreateAt"`   // 访问令牌创建时间
-	AccessExpiresIn  time.Duration `bson:"AccessExpiresIn"`  // 访问令牌有效期
-	Refresh          string        `bson:"Refresh"`          // 更新令牌
-	RefreshCreateAt  time.Time     `bson:"RefreshCreateAt"`  // 更新令牌创建时间
-	RefreshExpiresIn time.Duration `bson:"RefreshExpiresIn"` // 更新令牌有效期
+	ClientID         string        `bson:"ClientID" orm:"pk;column(client_id)"`    // 客户端标识
+	UserID           string        `bson:"UserID" orm:"column(user_id)"`           // 用户标识
+	RedirectURI      string        `bson:"RedirectURI" orm:"column(redirect_url)"` // 重定向URI
+	Scope            string        `bson:"Scope"`                                  // 权限范围
+	AuthType         string        `bson:"AuthType"`                               // 令牌授权类型
+	Access           string        `bson:"Access"`                                 // 访问令牌
+	AccessCreateAt   time.Time     `bson:"AccessCreateAt"`                         // 访问令牌创建时间
+	AccessExpiresIn  time.Duration `bson:"AccessExpiresIn"`                        // 访问令牌有效期
+	Refresh          string        `bson:"Refresh"`                                // 更新令牌
+	RefreshCreateAt  time.Time     `bson:"RefreshCreateAt"`                        // 更新令牌创建时间
+	RefreshExpiresIn time.Duration `bson:"RefreshExpiresIn"`                       // 更新令牌有效期
 }
 
 // GetClientID 客户端ID
