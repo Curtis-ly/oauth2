@@ -40,6 +40,18 @@ func NewMongoManager(mongoCfg *token.MongoConfig) *Manager {
 	return m
 }
 
+// NewMongoManager 创建基于mysql存储的管理实例
+func NewMysqlManager(mongoCfg *token.MysqlConfig) *Manager {
+	m := NewManager()
+	m.MapClientModel(models.NewClient())
+	m.MapTokenModel(models.NewToken())
+	m.MapAuthorizeGenerate(generates.NewAuthorizeGenerate())
+	m.MapAccessGenerate(generates.NewAccessGenerate())
+	m.MustTokenStorage(token.NewMysqlStore(mongoCfg))
+
+	return m
+}
+
 // NewManager 创建Manager的实例
 func NewManager() *Manager {
 	m := &Manager{
